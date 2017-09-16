@@ -20,7 +20,7 @@ public class CalculatorTests {
 		assertEquals("-41 - -10", "-31", calc.calculate(-41, -10, '-'));
 		assertEquals("9 * 3", "27", calc.calculate(9, 3, '*'));
 		assertEquals("9 * -4", "-36", calc.calculate(9, -4, '*'));
-		assertEquals("-4 * 8", "-32", calc.calculate(-4, 8, '-'));
+		assertEquals("-4 * 8", "-32", calc.calculate(-4, 8, '*'));
 		assertEquals("-12 * -9", "108", calc.calculate(-12, -9, '*'));
 		assertEquals("100 / 2", "50", calc.calculate(100, 2, '/'));
 		assertEquals("75 / -3", "-25", calc.calculate(75, -3, '/'));

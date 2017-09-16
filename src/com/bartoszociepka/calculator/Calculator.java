@@ -53,7 +53,6 @@ public class Calculator {
 			e.printStackTrace();
 		}
 		
-		System.out.println("You gave me " + firstNumber + " and " + secondNumber);
 	}
 	
 	public void AskForAction() {
@@ -68,9 +67,104 @@ public class Calculator {
 	
 	public String calculate(int firstNumber, int secondNumber, char action) {
 		switch(action) {
-			case '+': return Integer.toString(firstNumber + secondNumber);
-			case '-': return Integer.toString(firstNumber + (-secondNumber));
+			case '+': return add(firstNumber, secondNumber);
+			case '-': return subtract(firstNumber, secondNumber);
+			case '*': return multiply(firstNumber, secondNumber);
+			case '/': return divide(firstNumber, secondNumber);
+			case '^': return expotent(firstNumber, secondNumber);
 		}
 		return "Non-existent action";
+	}
+	
+	public int changeSign(int a) {
+		int helper = Integer.MAX_VALUE;
+		
+		while(helper + a != 0) {
+			helper++;
+		}
+		
+		return helper;
+		
+	}
+	
+	public String add(int a, int b) {
+		return Integer.toString(a + b);
+	}
+	
+	public String subtract(int a, int b) {
+		int helper = changeSign(b);
+		
+		return Integer.toString(a + helper);
+	}
+	
+	public String multiply(int a, int b) {
+		int result = 0;
+		int sign = 1;
+		
+		if(a < 0) {
+			sign = changeSign(sign);
+			a = changeSign(a);
+		}
+		
+		if(b < 0) {
+			sign = changeSign(sign);
+			b = changeSign(b);
+		}
+		
+		while(a != 0) {
+			a = Integer.parseInt(subtract(a, 1));
+			result += b;
+			
+		}
+		
+		return multiply(result, sign);
+	}
+	
+	public String divide(int a, int b) {
+		int sign = 1;
+		int result = 0;
+		
+		if(b == 0) return "Not-defined";
+		
+		if(a < 0) {
+			a = changeSign(a);
+			sign = changeSign(sign);
+		}
+		
+		if(b < 0) {
+			b = changeSign(b);
+			sign = changeSign(sign);
+		}
+		
+		while(a > 0) {
+			a = Integer.parseInt(subtract(a, b));
+			result++;
+		}
+		
+		if(a < 0) return "Non-integral answer";
+		else return multiply(result, sign);
+	}
+	
+	public String expotent(int a, int b) {
+		int result = 1;
+		if(b >= 0) {
+			while(b > 0) {
+				result = Integer.parseInt(multiply(result, a));
+				b = Integer.parseInt(subtract(b, 1));
+			}
+			return Integer.toString(result);
+		}
+		else {
+			while(b < 0) {
+				try {
+					result = Integer.parseInt(divide(result, a));
+				}
+				catch (NumberFormatException ex) {
+					return divide(result, a);
+				}
+				b++;
+			}
+			return Integer.toString(result);
+		}
 	}
 }
