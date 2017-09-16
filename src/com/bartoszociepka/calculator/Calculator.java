@@ -77,7 +77,7 @@ public class Calculator {
 	}
 	
 	public int changeSign(int a) {
-		int helper = Integer.MAX_VALUE;
+		int helper = -500;
 		
 		while(helper + a != 0) {
 			helper++;
@@ -116,8 +116,8 @@ public class Calculator {
 			result += b;
 			
 		}
-		
-		return multiply(result, sign);
+		if(sign == 1) return Integer.toString(result);
+		else return Integer.toString(changeSign(result));
 	}
 	
 	public String divide(int a, int b) {
@@ -142,7 +142,7 @@ public class Calculator {
 		}
 		
 		if(a < 0) return "Non-integral answer";
-		else return multiply(result, sign);
+ 		else return multiply(result, sign);
 	}
 	
 	public String expotent(int a, int b) {
